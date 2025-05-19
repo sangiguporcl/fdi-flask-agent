@@ -18,5 +18,9 @@ def run_agent():
 
     return jsonify(result)
 
+    import os
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 10000))  # Render dynamically sets this
+    app.run(host="0.0.0.0", port=port)
+
