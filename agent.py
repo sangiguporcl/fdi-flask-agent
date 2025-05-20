@@ -1,29 +1,30 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
 @app.route("/agent/run", methods=["POST"])
 def run_agent():
-    print("HEADERS RECEIVED:", dict(request.headers))
-    print("BODY RECEIVED:", request.get_data(as_text=True))  # Full raw body
-    print("Parsed JSON:", request.get_json())  # Cleaned JSON
-    data = request.get_json()
-    scenario_id = data.get("scenario_id")
-    segment_name = data.get("segment_name")
+    # Hardcoded input values
+    region = "APAC"
+    deal_size = "30000"
 
-    # Example response logic
+    print("Received hardcoded request for region:", region, "deal size:", deal_size)
+
+    # Simulated agent output
     result = {
-        "scenario_id": scenario_id,
-        "segment_name": segment_name,
+        "region": region,
+        "deal_size": deal_size,
         "recommendation": "Increase price by 10%",
         "confidence": 0.91
     }
 
     return jsonify(result)
 
-    import os
+@app.route("/", methods=["GET"])
+def home():
+    return "FDI Flask Agent is running."
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))  # Render dynamically sets this
+    import os
+    port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-
