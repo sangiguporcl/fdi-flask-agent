@@ -5,6 +5,8 @@ app = Flask(__name__)
 @app.route("/agent/run", methods=["POST"])
 def run_agent():
     print("HEADERS RECEIVED:", dict(request.headers))
+    print("BODY RECEIVED:", request.get_data(as_text=True))  # Full raw body
+    print("Parsed JSON:", request.get_json())  # Cleaned JSON
     data = request.get_json()
     scenario_id = data.get("scenario_id")
     segment_name = data.get("segment_name")
