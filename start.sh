@@ -1,9 +1,9 @@
 #!/bin/bash
 
-echo "⚙️ Starting agent on port ${PORT}"
+# Fallback to 10000 only if $PORT is not set
+PORT=${PORT:-10000}
 
-# Render sets $PORT as an env var, but some shells need it exported
-export PORT=${PORT:-10000}  # fallback to 10000 only if unset
+echo "🛠️ Starting agent on port ${PORT}"
 
-# Start the Flask app via gunicorn
+# Start your Flask app using gunicorn
 exec gunicorn agent:app --bind 0.0.0.0:$PORT
