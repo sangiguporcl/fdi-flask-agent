@@ -9,7 +9,7 @@ def run_agent():
     region = request.form.get("region")
     deal_size = request.form.get("deal_size")
 
-    print("Received region:", region)
+    print("Received region :", region)
     print("Received deal size:", deal_size)
 
     response = {
